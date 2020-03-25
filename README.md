@@ -1,2 +1,0 @@
-# SingleSelect
-Created with CodeSandbox
