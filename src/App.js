@@ -107,7 +107,7 @@ export default function App() {
   const [state, setState] = React.useState("");
 
   const onChange = data => {
-    setState(data.selectedItem);
+    setState(data);
   };
 
   return (

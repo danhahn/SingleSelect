@@ -73,6 +73,20 @@ export const Menu = styled.ul`
   ${props => props.isOffset && `transform: translateY(-100%);`}
 `;
 
+export const SelectBox = styled.select`
+  border: none;
+  font-size: 1rem;
+  padding: ${bottomPadding};
+  background: transparent;
+  ${getArrow(false)}
+  background-color: white;
+  background-size: 10px;
+  background-repeat: no-repeat;
+  background-position: 95% center;
+  border: 1px solid lightgray;
+  border-radius: ${borderRadius};
+`;
+
 export const MenuItem = styled.li`
   ${padding}
   line-height: 1rem;
