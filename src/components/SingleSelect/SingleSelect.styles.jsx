@@ -43,7 +43,11 @@ export const Select = styled.div`
   background-position: 95% center;
   box-shadow: ${props => props.isOpen && boxShadow};
   ${props =>
-    props.isOpen && `border-radius: ${borderRadius} ${borderRadius} 0 0`}
+    props.isOpen && `border-radius: ${borderRadius} ${borderRadius} 0 0;`}
+  ${props =>
+    props.isOpen &&
+    props.isOffset &&
+    `border-radius:  0 0 ${borderRadius} ${borderRadius};`}
 `;
 
 export const Menu = styled.ul`
@@ -51,17 +55,22 @@ export const Menu = styled.ul`
   margin: 0;
   padding: 0;
   position: absolute;
-  z-index: 3;
+  z-index: ${props => (props.isOffset ? 1 : 3)};
   top: ${props =>
-    props.liHeight ? `${props.liHeight / props.displayNumber - 1}px` : "0px"};
+    props.liHeight ? `${props.liHeight / props.displayNumber}px` : "0px"};
+  ${props => props.isOffset && `top: 1px;`}
   max-height: ${props => (props.liHeight ? `${props.liHeight}px` : "0px")};
   overflow: auto;
   border: 1px solid lightgray;
   background-color: white;
   outline: none;
-  border-radius: 0 0 ${borderRadius} ${borderRadius};
+  border-radius: ${props =>
+    !props.isOffset
+      ? `0 0 ${borderRadius} ${borderRadius}`
+      : `${borderRadius} ${borderRadius} 0 0`};
   box-shadow: ${boxShadow};
   width: ${props => props.width - 2}px;
+  ${props => props.isOffset && `transform: translateY(-100%);`}
 `;
 
 export const MenuItem = styled.li`
@@ -70,8 +79,7 @@ export const MenuItem = styled.li`
   border-bottom: 1px solid lightgray;
   white-space: nowrap;
   cursor: pointer;
-  ${props => props.selected && `background-color: lightgray;`}
-  :last-of-type {
+  ${props => props.selected && `background-color: lightgray;`} :last-of-type {
     border-bottom-color: transparent;
   }
 `;

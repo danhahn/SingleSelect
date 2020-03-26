@@ -36,26 +36,28 @@ const SingleSelect = ({
 
   React.useEffect(() => {
     const data = el.current.querySelector(".list-item").getBoundingClientRect();
-    console.log(data);
-    console.log(window.innerHeight);
     const height = data.height;
     const width = Math.floor(data.width);
-    setMaxHeight(height * displayNumber);
+    setMaxHeight(height * displayNumber - 1);
     setWidth(width);
   }, [data, displayNumber]);
+
+  const checkOffSet = () => {
+    const { bottom } = el.current.getBoundingClientRect();
+    const innerHeight = window.innerHeight * 0.75;
+    const bottomEdge = Math.floor(bottom + maxHeight);
+    if (!isOpen && bottomEdge > innerHeight) {
+      setIsOffset(true);
+    }
+  };
 
   const longestName = getLongestLabel(data);
 
   return (
     <div ref={el}>
       <Label {...getLabelProps()}>Choose an president:</Label>
-      <Flex
-        isOpen={isOpen}
-        onClick={() => {
-          console.log("click");
-        }}
-      >
-        <Select isOpen={isOpen} {...getToggleButtonProps()}>
+      <Flex isOpen={isOpen} onClick={checkOffSet}>
+        <Select isOpen={isOpen} {...getToggleButtonProps()} isOffset={isOffset}>
           {selectedItem || buttonText}
         </Select>
         {isOpen && (
@@ -64,6 +66,7 @@ const SingleSelect = ({
             liHeight={maxHeight}
             displayNumber={displayNumber}
             width={width}
+            isOffset={isOffset}
           >
             {selectedItem && (
               <MenuItem
