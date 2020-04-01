@@ -13,3 +13,7 @@ You can use the same single select for desktop and mobile. You get the same sele
 The selected item will always be the same length as the longest time.
 
 When you get to the bottom of the page the dropdown changes to a drop up.
+
+## Tech notes
+
+Build using downshift and emotion styled components
