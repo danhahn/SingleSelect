@@ -112,7 +112,7 @@ export default function App() {
 
   return (
     <div className="App">
-      <h1>The best single select ever?</h1>
+      <h1>Single Select</h1>
       <p> State: {state}</p>
       <SingleSelect data={states} onChange={onChange} />
       <p>
